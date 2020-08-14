@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyr.iot.platform.mapper.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.jyr.iot.platform.pojo.Permission" >
+    <id column="permission_id" property="permissionId" jdbcType="INTEGER" />
+    <result column="permission_zhyd" property="permissionZhyd" jdbcType="BIT" />
+    <result column="permission_dqhz" property="permissionDqhz" jdbcType="BIT" />
+    <result column="permission_xfdy" property="permissionXfdy" jdbcType="BIT" />
+    <result column="permission_sdy" property="permissionSdy" jdbcType="BIT" />
+    <result column="permission_znzm" property="permissionZnzm" jdbcType="BIT" />
+    <result column="permission_zndy" property="permissionZndy" jdbcType="BIT" />
+    <result column="permission_znpd" property="permissionZnpd" jdbcType="BIT" />
+    <result column="permission_zngqy" property="permissionZngqy" jdbcType="BIT" />
+    <result column="permission_extend1" property="permissionExtend1" jdbcType="BIT" />
+    <result column="permission_extend2" property="permissionExtend2" jdbcType="BIT" />
+    <result column="permission_extend3" property="permissionExtend3" jdbcType="BIT" />
+    <result column="permission_extend4" property="permissionExtend4" jdbcType="BIT" />
+    <result column="permission_extend5" property="permissionExtend5" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    permission_id, permission_zhyd, permission_dqhz, permission_xfdy, permission_sdy, 
+    permission_znzm, permission_zndy, permission_znpd, permission_zngqy, permission_extend1, 
+    permission_extend2, permission_extend3, permission_extend4, permission_extend5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jyr.iot.platform.pojo.PermissionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from _permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _permission
+    where permission_id = #{permissionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _permission
+    where permission_id = #{permissionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jyr.iot.platform.pojo.PermissionExample" >
+    delete from _permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jyr.iot.platform.pojo.Permission" useGeneratedKeys="true" keyProperty="permissionId">
+    insert into _permission (permission_id, permission_zhyd, permission_dqhz,
+      permission_xfdy, permission_sdy, permission_znzm, 
+      permission_zndy, permission_znpd, permission_zngqy, 
+      permission_extend1, permission_extend2, permission_extend3, 
+      permission_extend4, permission_extend5)
+    values (#{permissionId,jdbcType=INTEGER}, #{permissionZhyd,jdbcType=BIT}, #{permissionDqhz,jdbcType=BIT}, 
+      #{permissionXfdy,jdbcType=BIT}, #{permissionSdy,jdbcType=BIT}, #{permissionZnzm,jdbcType=BIT}, 
+      #{permissionZndy,jdbcType=BIT}, #{permissionZnpd,jdbcType=BIT}, #{permissionZngqy,jdbcType=BIT}, 
+      #{permissionExtend1,jdbcType=BIT}, #{permissionExtend2,jdbcType=BIT}, #{permissionExtend3,jdbcType=BIT}, 
+      #{permissionExtend4,jdbcType=BIT}, #{permissionExtend5,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyr.iot.platform.pojo.Permission" >
+    insert into _permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="permissionId != null" >
+        permission_id,
+      </if>
+      <if test="permissionZhyd != null" >
+        permission_zhyd,
+      </if>
+      <if test="permissionDqhz != null" >
+        permission_dqhz,
+      </if>
+      <if test="permissionXfdy != null" >
+        permission_xfdy,
+      </if>
+      <if test="permissionSdy != null" >
+        permission_sdy,
+      </if>
+      <if test="permissionZnzm != null" >
+        permission_znzm,
+      </if>
+      <if test="permissionZndy != null" >
+        permission_zndy,
+      </if>
+      <if test="permissionZnpd != null" >
+        permission_znpd,
+      </if>
+      <if test="permissionZngqy != null" >
+        permission_zngqy,
+      </if>
+      <if test="permissionExtend1 != null" >
+        permission_extend1,
+      </if>
+      <if test="permissionExtend2 != null" >
+        permission_extend2,
+      </if>
+      <if test="permissionExtend3 != null" >
+        permission_extend3,
+      </if>
+      <if test="permissionExtend4 != null" >
+        permission_extend4,
+      </if>
+      <if test="permissionExtend5 != null" >
+        permission_extend5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="permissionId != null" >
+        #{permissionId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionZhyd != null" >
+        #{permissionZhyd,jdbcType=BIT},
+      </if>
+      <if test="permissionDqhz != null" >
+        #{permissionDqhz,jdbcType=BIT},
+      </if>
+      <if test="permissionXfdy != null" >
+        #{permissionXfdy,jdbcType=BIT},
+      </if>
+      <if test="permissionSdy != null" >
+        #{permissionSdy,jdbcType=BIT},
+      </if>
+      <if test="permissionZnzm != null" >
+        #{permissionZnzm,jdbcType=BIT},
+      </if>
+      <if test="permissionZndy != null" >
+        #{permissionZndy,jdbcType=BIT},
+      </if>
+      <if test="permissionZnpd != null" >
+        #{permissionZnpd,jdbcType=BIT},
+      </if>
+      <if test="permissionZngqy != null" >
+        #{permissionZngqy,jdbcType=BIT},
+      </if>
+      <if test="permissionExtend1 != null" >
+        #{permissionExtend1,jdbcType=BIT},
+      </if>
+      <if test="permissionExtend2 != null" >
+        #{permissionExtend2,jdbcType=BIT},
+      </if>
+      <if test="permissionExtend3 != null" >
+        #{permissionExtend3,jdbcType=BIT},
+      </if>
+      <if test="permissionExtend4 != null" >
+        #{permissionExtend4,jdbcType=BIT},
+      </if>
+      <if test="permissionExtend5 != null" >
+        #{permissionExtend5,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jyr.iot.platform.pojo.PermissionExample" resultType="java.lang.Integer" >
+    select count(*) from _permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update _permission
+    <set >
+      <if test="record.permissionId != null" >
+        permission_id = #{record.permissionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.permissionZhyd != null" >
+        permission_zhyd = #{record.permissionZhyd,jdbcType=BIT},
+      </if>
+      <if test="record.permissionDqhz != null" >
+        permission_dqhz = #{record.permissionDqhz,jdbcType=BIT},
+      </if>
+      <if test="record.permissionXfdy != null" >
+        permission_xfdy = #{record.permissionXfdy,jdbcType=BIT},
+      </if>
+      <if test="record.permissionSdy != null" >
+        permission_sdy = #{record.permissionSdy,jdbcType=BIT},
+      </if>
+      <if test="record.permissionZnzm != null" >
+        permission_znzm = #{record.permissionZnzm,jdbcType=BIT},
+      </if>
+      <if test="record.permissionZndy != null" >
+        permission_zndy = #{record.permissionZndy,jdbcType=BIT},
+      </if>
+      <if test="record.permissionZnpd != null" >
+        permission_znpd = #{record.permissionZnpd,jdbcType=BIT},
+      </if>
+      <if test="record.permissionZngqy != null" >
+        permission_zngqy = #{record.permissionZngqy,jdbcType=BIT},
+      </if>
+      <if test="record.permissionExtend1 != null" >
+        permission_extend1 = #{record.permissionExtend1,jdbcType=BIT},
+      </if>
+      <if test="record.permissionExtend2 != null" >
+        permission_extend2 = #{record.permissionExtend2,jdbcType=BIT},
+      </if>
+      <if test="record.permissionExtend3 != null" >
+        permission_extend3 = #{record.permissionExtend3,jdbcType=BIT},
+      </if>
+      <if test="record.permissionExtend4 != null" >
+        permission_extend4 = #{record.permissionExtend4,jdbcType=BIT},
+      </if>
+      <if test="record.permissionExtend5 != null" >
+        permission_extend5 = #{record.permissionExtend5,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update _permission
+    set permission_id = #{record.permissionId,jdbcType=INTEGER},
+      permission_zhyd = #{record.permissionZhyd,jdbcType=BIT},
+      permission_dqhz = #{record.permissionDqhz,jdbcType=BIT},
+      permission_xfdy = #{record.permissionXfdy,jdbcType=BIT},
+      permission_sdy = #{record.permissionSdy,jdbcType=BIT},
+      permission_znzm = #{record.permissionZnzm,jdbcType=BIT},
+      permission_zndy = #{record.permissionZndy,jdbcType=BIT},
+      permission_znpd = #{record.permissionZnpd,jdbcType=BIT},
+      permission_zngqy = #{record.permissionZngqy,jdbcType=BIT},
+      permission_extend1 = #{record.permissionExtend1,jdbcType=BIT},
+      permission_extend2 = #{record.permissionExtend2,jdbcType=BIT},
+      permission_extend3 = #{record.permissionExtend3,jdbcType=BIT},
+      permission_extend4 = #{record.permissionExtend4,jdbcType=BIT},
+      permission_extend5 = #{record.permissionExtend5,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyr.iot.platform.pojo.Permission" >
+    update _permission
+    <set >
+      <if test="permissionZhyd != null" >
+        permission_zhyd = #{permissionZhyd,jdbcType=BIT},
+      </if>
+      <if test="permissionDqhz != null" >
+        permission_dqhz = #{permissionDqhz,jdbcType=BIT},
+      </if>
+      <if test="permissionXfdy != null" >
+        permission_xfdy = #{permissionXfdy,jdbcType=BIT},
+      </if>
+      <if test="permissionSdy != null" >
+        permission_sdy = #{permissionSdy,jdbcType=BIT},
+      </if>
+      <if test="permissionZnzm != null" >
+        permission_znzm = #{permissionZnzm,jdbcType=BIT},
+      </if>
+      <if test="permissionZndy != null" >
+        permission_zndy = #{permissionZndy,jdbcType=BIT},
+      </if>
+      <if test="permissionZnpd != null" >
+        permission_znpd = #{permissionZnpd,jdbcType=BIT},
+      </if>
+      <if test="permissionZngqy != null" >
+        permission_zngqy = #{permissionZngqy,jdbcType=BIT},
+      </if>
+      <if test="permissionExtend1 != null" >
+        permission_extend1 = #{permissionExtend1,jdbcType=BIT},
+      </if>
+      <if test="permissionExtend2 != null" >
+        permission_extend2 = #{permissionExtend2,jdbcType=BIT},
+      </if>
+      <if test="permissionExtend3 != null" >
+        permission_extend3 = #{permissionExtend3,jdbcType=BIT},
+      </if>
+      <if test="permissionExtend4 != null" >
+        permission_extend4 = #{permissionExtend4,jdbcType=BIT},
+      </if>
+      <if test="permissionExtend5 != null" >
+        permission_extend5 = #{permissionExtend5,jdbcType=BIT},
+      </if>
+    </set>
+    where permission_id = #{permissionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyr.iot.platform.pojo.Permission" >
+    update _permission
+    set permission_zhyd = #{permissionZhyd,jdbcType=BIT},
+      permission_dqhz = #{permissionDqhz,jdbcType=BIT},
+      permission_xfdy = #{permissionXfdy,jdbcType=BIT},
+      permission_sdy = #{permissionSdy,jdbcType=BIT},
+      permission_znzm = #{permissionZnzm,jdbcType=BIT},
+      permission_zndy = #{permissionZndy,jdbcType=BIT},
+      permission_znpd = #{permissionZnpd,jdbcType=BIT},
+      permission_zngqy = #{permissionZngqy,jdbcType=BIT},
+      permission_extend1 = #{permissionExtend1,jdbcType=BIT},
+      permission_extend2 = #{permissionExtend2,jdbcType=BIT},
+      permission_extend3 = #{permissionExtend3,jdbcType=BIT},
+      permission_extend4 = #{permissionExtend4,jdbcType=BIT},
+      permission_extend5 = #{permissionExtend5,jdbcType=BIT}
+    where permission_id = #{permissionId,jdbcType=INTEGER}
+  </update>
+</mapper>

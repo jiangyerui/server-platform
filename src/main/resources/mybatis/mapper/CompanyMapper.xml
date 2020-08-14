@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyr.iot.platform.mapper.CompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.jyr.iot.platform.pojo.Company" >
+    <id column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="company_introduce" property="companyIntroduce" jdbcType="VARCHAR" />
+    <result column="company_img" property="companyImg" jdbcType="VARCHAR" />
+    <result column="company_user_id" property="companyUserId" jdbcType="INTEGER" />
+    <result column="company_extend1" property="companyExtend1" jdbcType="VARCHAR" />
+    <result column="company_extend2" property="companyExtend2" jdbcType="VARCHAR" />
+    <result column="company_extend3" property="companyExtend3" jdbcType="VARCHAR" />
+    <result column="company_extend4" property="companyExtend4" jdbcType="VARCHAR" />
+    <result column="company_extend5" property="companyExtend5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    company_id, company_name, company_introduce, company_img, company_user_id, company_extend1, 
+    company_extend2, company_extend3, company_extend4, company_extend5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jyr.iot.platform.pojo.CompanyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from _company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _company
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _company
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jyr.iot.platform.pojo.CompanyExample" >
+    delete from _company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jyr.iot.platform.pojo.Company" >
+    insert into _company (company_id, company_name, company_introduce, 
+      company_img, company_user_id, company_extend1, 
+      company_extend2, company_extend3, company_extend4, 
+      company_extend5)
+    values (#{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{companyIntroduce,jdbcType=VARCHAR}, 
+      #{companyImg,jdbcType=VARCHAR}, #{companyUserId,jdbcType=INTEGER}, #{companyExtend1,jdbcType=VARCHAR}, 
+      #{companyExtend2,jdbcType=VARCHAR}, #{companyExtend3,jdbcType=VARCHAR}, #{companyExtend4,jdbcType=VARCHAR}, 
+      #{companyExtend5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyr.iot.platform.pojo.Company" >
+    insert into _company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="companyIntroduce != null" >
+        company_introduce,
+      </if>
+      <if test="companyImg != null" >
+        company_img,
+      </if>
+      <if test="companyUserId != null" >
+        company_user_id,
+      </if>
+      <if test="companyExtend1 != null" >
+        company_extend1,
+      </if>
+      <if test="companyExtend2 != null" >
+        company_extend2,
+      </if>
+      <if test="companyExtend3 != null" >
+        company_extend3,
+      </if>
+      <if test="companyExtend4 != null" >
+        company_extend4,
+      </if>
+      <if test="companyExtend5 != null" >
+        company_extend5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIntroduce != null" >
+        #{companyIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="companyImg != null" >
+        #{companyImg,jdbcType=VARCHAR},
+      </if>
+      <if test="companyUserId != null" >
+        #{companyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="companyExtend1 != null" >
+        #{companyExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExtend2 != null" >
+        #{companyExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExtend3 != null" >
+        #{companyExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExtend4 != null" >
+        #{companyExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExtend5 != null" >
+        #{companyExtend5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jyr.iot.platform.pojo.CompanyExample" resultType="java.lang.Integer" >
+    select count(*) from _company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update _company
+    <set >
+      <if test="record.companyId != null" >
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyName != null" >
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyIntroduce != null" >
+        company_introduce = #{record.companyIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyImg != null" >
+        company_img = #{record.companyImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyUserId != null" >
+        company_user_id = #{record.companyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyExtend1 != null" >
+        company_extend1 = #{record.companyExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExtend2 != null" >
+        company_extend2 = #{record.companyExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExtend3 != null" >
+        company_extend3 = #{record.companyExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExtend4 != null" >
+        company_extend4 = #{record.companyExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyExtend5 != null" >
+        company_extend5 = #{record.companyExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update _company
+    set company_id = #{record.companyId,jdbcType=INTEGER},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
+      company_introduce = #{record.companyIntroduce,jdbcType=VARCHAR},
+      company_img = #{record.companyImg,jdbcType=VARCHAR},
+      company_user_id = #{record.companyUserId,jdbcType=INTEGER},
+      company_extend1 = #{record.companyExtend1,jdbcType=VARCHAR},
+      company_extend2 = #{record.companyExtend2,jdbcType=VARCHAR},
+      company_extend3 = #{record.companyExtend3,jdbcType=VARCHAR},
+      company_extend4 = #{record.companyExtend4,jdbcType=VARCHAR},
+      company_extend5 = #{record.companyExtend5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyr.iot.platform.pojo.Company" >
+    update _company
+    <set >
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIntroduce != null" >
+        company_introduce = #{companyIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="companyImg != null" >
+        company_img = #{companyImg,jdbcType=VARCHAR},
+      </if>
+      <if test="companyUserId != null" >
+        company_user_id = #{companyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="companyExtend1 != null" >
+        company_extend1 = #{companyExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExtend2 != null" >
+        company_extend2 = #{companyExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExtend3 != null" >
+        company_extend3 = #{companyExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExtend4 != null" >
+        company_extend4 = #{companyExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="companyExtend5 != null" >
+        company_extend5 = #{companyExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyr.iot.platform.pojo.Company" >
+    update _company
+    set company_name = #{companyName,jdbcType=VARCHAR},
+      company_introduce = #{companyIntroduce,jdbcType=VARCHAR},
+      company_img = #{companyImg,jdbcType=VARCHAR},
+      company_user_id = #{companyUserId,jdbcType=INTEGER},
+      company_extend1 = #{companyExtend1,jdbcType=VARCHAR},
+      company_extend2 = #{companyExtend2,jdbcType=VARCHAR},
+      company_extend3 = #{companyExtend3,jdbcType=VARCHAR},
+      company_extend4 = #{companyExtend4,jdbcType=VARCHAR},
+      company_extend5 = #{companyExtend5,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+</mapper>

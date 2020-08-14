@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyr.iot.platform.mapper.OperationLogMapper" >
+  <resultMap id="BaseResultMap" type="com.jyr.iot.platform.pojo.OperationLog" >
+    <id column="operation_id" property="operationId" jdbcType="INTEGER" />
+    <result column="operation_time" property="operationTime" jdbcType="TIMESTAMP" />
+    <result column="operation_type" property="operationType" jdbcType="INTEGER" />
+    <result column="operation_device_id" property="operationDeviceId" jdbcType="INTEGER" />
+    <result column="operation_user_id" property="operationUserId" jdbcType="INTEGER" />
+    <result column="operation_result" property="operationResult" jdbcType="INTEGER" />
+    <result column="operation_extend1" property="operationExtend1" jdbcType="VARCHAR" />
+    <result column="operation_extend2" property="operationExtend2" jdbcType="VARCHAR" />
+    <result column="operation_extend3" property="operationExtend3" jdbcType="VARCHAR" />
+    <result column="operation_extend4" property="operationExtend4" jdbcType="VARCHAR" />
+    <result column="operation_extend5" property="operationExtend5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    operation_id, operation_time, operation_type, operation_device_id, operation_user_id, 
+    operation_result, operation_extend1, operation_extend2, operation_extend3, operation_extend4, 
+    operation_extend5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jyr.iot.platform.pojo.OperationLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from _operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _operation_log
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _operation_log
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jyr.iot.platform.pojo.OperationLogExample" >
+    delete from _operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jyr.iot.platform.pojo.OperationLog" >
+    insert into _operation_log (operation_id, operation_time, operation_type, 
+      operation_device_id, operation_user_id, operation_result, 
+      operation_extend1, operation_extend2, operation_extend3, 
+      operation_extend4, operation_extend5)
+    values (#{operationId,jdbcType=INTEGER}, #{operationTime,jdbcType=TIMESTAMP}, #{operationType,jdbcType=INTEGER}, 
+      #{operationDeviceId,jdbcType=INTEGER}, #{operationUserId,jdbcType=INTEGER}, #{operationResult,jdbcType=INTEGER}, 
+      #{operationExtend1,jdbcType=VARCHAR}, #{operationExtend2,jdbcType=VARCHAR}, #{operationExtend3,jdbcType=VARCHAR}, 
+      #{operationExtend4,jdbcType=VARCHAR}, #{operationExtend5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyr.iot.platform.pojo.OperationLog" >
+    insert into _operation_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="operationId != null" >
+        operation_id,
+      </if>
+      <if test="operationTime != null" >
+        operation_time,
+      </if>
+      <if test="operationType != null" >
+        operation_type,
+      </if>
+      <if test="operationDeviceId != null" >
+        operation_device_id,
+      </if>
+      <if test="operationUserId != null" >
+        operation_user_id,
+      </if>
+      <if test="operationResult != null" >
+        operation_result,
+      </if>
+      <if test="operationExtend1 != null" >
+        operation_extend1,
+      </if>
+      <if test="operationExtend2 != null" >
+        operation_extend2,
+      </if>
+      <if test="operationExtend3 != null" >
+        operation_extend3,
+      </if>
+      <if test="operationExtend4 != null" >
+        operation_extend4,
+      </if>
+      <if test="operationExtend5 != null" >
+        operation_extend5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="operationId != null" >
+        #{operationId,jdbcType=INTEGER},
+      </if>
+      <if test="operationTime != null" >
+        #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operationType != null" >
+        #{operationType,jdbcType=INTEGER},
+      </if>
+      <if test="operationDeviceId != null" >
+        #{operationDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="operationUserId != null" >
+        #{operationUserId,jdbcType=INTEGER},
+      </if>
+      <if test="operationResult != null" >
+        #{operationResult,jdbcType=INTEGER},
+      </if>
+      <if test="operationExtend1 != null" >
+        #{operationExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="operationExtend2 != null" >
+        #{operationExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="operationExtend3 != null" >
+        #{operationExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="operationExtend4 != null" >
+        #{operationExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="operationExtend5 != null" >
+        #{operationExtend5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jyr.iot.platform.pojo.OperationLogExample" resultType="java.lang.Integer" >
+    select count(*) from _operation_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update _operation_log
+    <set >
+      <if test="record.operationId != null" >
+        operation_id = #{record.operationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.operationTime != null" >
+        operation_time = #{record.operationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.operationType != null" >
+        operation_type = #{record.operationType,jdbcType=INTEGER},
+      </if>
+      <if test="record.operationDeviceId != null" >
+        operation_device_id = #{record.operationDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.operationUserId != null" >
+        operation_user_id = #{record.operationUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.operationResult != null" >
+        operation_result = #{record.operationResult,jdbcType=INTEGER},
+      </if>
+      <if test="record.operationExtend1 != null" >
+        operation_extend1 = #{record.operationExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationExtend2 != null" >
+        operation_extend2 = #{record.operationExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationExtend3 != null" >
+        operation_extend3 = #{record.operationExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationExtend4 != null" >
+        operation_extend4 = #{record.operationExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationExtend5 != null" >
+        operation_extend5 = #{record.operationExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update _operation_log
+    set operation_id = #{record.operationId,jdbcType=INTEGER},
+      operation_time = #{record.operationTime,jdbcType=TIMESTAMP},
+      operation_type = #{record.operationType,jdbcType=INTEGER},
+      operation_device_id = #{record.operationDeviceId,jdbcType=INTEGER},
+      operation_user_id = #{record.operationUserId,jdbcType=INTEGER},
+      operation_result = #{record.operationResult,jdbcType=INTEGER},
+      operation_extend1 = #{record.operationExtend1,jdbcType=VARCHAR},
+      operation_extend2 = #{record.operationExtend2,jdbcType=VARCHAR},
+      operation_extend3 = #{record.operationExtend3,jdbcType=VARCHAR},
+      operation_extend4 = #{record.operationExtend4,jdbcType=VARCHAR},
+      operation_extend5 = #{record.operationExtend5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyr.iot.platform.pojo.OperationLog" >
+    update _operation_log
+    <set >
+      <if test="operationTime != null" >
+        operation_time = #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operationType != null" >
+        operation_type = #{operationType,jdbcType=INTEGER},
+      </if>
+      <if test="operationDeviceId != null" >
+        operation_device_id = #{operationDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="operationUserId != null" >
+        operation_user_id = #{operationUserId,jdbcType=INTEGER},
+      </if>
+      <if test="operationResult != null" >
+        operation_result = #{operationResult,jdbcType=INTEGER},
+      </if>
+      <if test="operationExtend1 != null" >
+        operation_extend1 = #{operationExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="operationExtend2 != null" >
+        operation_extend2 = #{operationExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="operationExtend3 != null" >
+        operation_extend3 = #{operationExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="operationExtend4 != null" >
+        operation_extend4 = #{operationExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="operationExtend5 != null" >
+        operation_extend5 = #{operationExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyr.iot.platform.pojo.OperationLog" >
+    update _operation_log
+    set operation_time = #{operationTime,jdbcType=TIMESTAMP},
+      operation_type = #{operationType,jdbcType=INTEGER},
+      operation_device_id = #{operationDeviceId,jdbcType=INTEGER},
+      operation_user_id = #{operationUserId,jdbcType=INTEGER},
+      operation_result = #{operationResult,jdbcType=INTEGER},
+      operation_extend1 = #{operationExtend1,jdbcType=VARCHAR},
+      operation_extend2 = #{operationExtend2,jdbcType=VARCHAR},
+      operation_extend3 = #{operationExtend3,jdbcType=VARCHAR},
+      operation_extend4 = #{operationExtend4,jdbcType=VARCHAR},
+      operation_extend5 = #{operationExtend5,jdbcType=VARCHAR}
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyr.iot.platform.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.jyr.iot.platform.pojo.Menu" >
+    <id column="menu_id" property="menuId" jdbcType="INTEGER" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_img" property="menuImg" jdbcType="VARCHAR" />
+    <result column="menu_key" property="menuKey" jdbcType="VARCHAR" />
+    <result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
+    <result column="menu_action" property="menuAction" jdbcType="VARCHAR" />
+    <result column="menu_parent_id" property="menuParentId" jdbcType="INTEGER" />
+    <result column="menu_hide" property="menuHide" jdbcType="BIT" />
+    <result column="menu_auth_url" property="menuAuthUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    menu_id, menu_name, menu_img, menu_key, menu_url, menu_action, menu_parent_id, menu_hide, 
+    menu_auth_url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jyr.iot.platform.pojo.MenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from _menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jyr.iot.platform.pojo.MenuExample" >
+    delete from _menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jyr.iot.platform.pojo.Menu" >
+    insert into _menu (menu_id, menu_name, menu_img, 
+      menu_key, menu_url, menu_action, 
+      menu_parent_id, menu_hide, menu_auth_url
+      )
+    values (#{menuId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, #{menuImg,jdbcType=VARCHAR}, 
+      #{menuKey,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, #{menuAction,jdbcType=VARCHAR}, 
+      #{menuParentId,jdbcType=INTEGER}, #{menuHide,jdbcType=BIT}, #{menuAuthUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyr.iot.platform.pojo.Menu" >
+    insert into _menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuImg != null" >
+        menu_img,
+      </if>
+      <if test="menuKey != null" >
+        menu_key,
+      </if>
+      <if test="menuUrl != null" >
+        menu_url,
+      </if>
+      <if test="menuAction != null" >
+        menu_action,
+      </if>
+      <if test="menuParentId != null" >
+        menu_parent_id,
+      </if>
+      <if test="menuHide != null" >
+        menu_hide,
+      </if>
+      <if test="menuAuthUrl != null" >
+        menu_auth_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuImg != null" >
+        #{menuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="menuKey != null" >
+        #{menuKey,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuAction != null" >
+        #{menuAction,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentId != null" >
+        #{menuParentId,jdbcType=INTEGER},
+      </if>
+      <if test="menuHide != null" >
+        #{menuHide,jdbcType=BIT},
+      </if>
+      <if test="menuAuthUrl != null" >
+        #{menuAuthUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jyr.iot.platform.pojo.MenuExample" resultType="java.lang.Integer" >
+    select count(*) from _menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update _menu
+    <set >
+      <if test="record.menuId != null" >
+        menu_id = #{record.menuId,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuName != null" >
+        menu_name = #{record.menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuImg != null" >
+        menu_img = #{record.menuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuKey != null" >
+        menu_key = #{record.menuKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuUrl != null" >
+        menu_url = #{record.menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuAction != null" >
+        menu_action = #{record.menuAction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuParentId != null" >
+        menu_parent_id = #{record.menuParentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuHide != null" >
+        menu_hide = #{record.menuHide,jdbcType=BIT},
+      </if>
+      <if test="record.menuAuthUrl != null" >
+        menu_auth_url = #{record.menuAuthUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update _menu
+    set menu_id = #{record.menuId,jdbcType=INTEGER},
+      menu_name = #{record.menuName,jdbcType=VARCHAR},
+      menu_img = #{record.menuImg,jdbcType=VARCHAR},
+      menu_key = #{record.menuKey,jdbcType=VARCHAR},
+      menu_url = #{record.menuUrl,jdbcType=VARCHAR},
+      menu_action = #{record.menuAction,jdbcType=VARCHAR},
+      menu_parent_id = #{record.menuParentId,jdbcType=INTEGER},
+      menu_hide = #{record.menuHide,jdbcType=BIT},
+      menu_auth_url = #{record.menuAuthUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyr.iot.platform.pojo.Menu" >
+    update _menu
+    <set >
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuImg != null" >
+        menu_img = #{menuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="menuKey != null" >
+        menu_key = #{menuKey,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuAction != null" >
+        menu_action = #{menuAction,jdbcType=VARCHAR},
+      </if>
+      <if test="menuParentId != null" >
+        menu_parent_id = #{menuParentId,jdbcType=INTEGER},
+      </if>
+      <if test="menuHide != null" >
+        menu_hide = #{menuHide,jdbcType=BIT},
+      </if>
+      <if test="menuAuthUrl != null" >
+        menu_auth_url = #{menuAuthUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyr.iot.platform.pojo.Menu" >
+    update _menu
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_img = #{menuImg,jdbcType=VARCHAR},
+      menu_key = #{menuKey,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_action = #{menuAction,jdbcType=VARCHAR},
+      menu_parent_id = #{menuParentId,jdbcType=INTEGER},
+      menu_hide = #{menuHide,jdbcType=BIT},
+      menu_auth_url = #{menuAuthUrl,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,11 @@
+﻿实体类更改记录
+
+1，项目表的两个字段需加注解
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    private Date projectStartTime;
+
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    private Date projectExpireTime;
+
+2、权限表的xml文件需加新增后主键返回
+  <insert id="insert" parameterType="com.jyr.iot.platform.pojo.Permission" useGeneratedKeys="true" keyProperty="permissionId">

@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyr.iot.platform.mapper.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.jyr.iot.platform.pojo.Project" >
+    <id column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="project_introduce" property="projectIntroduce" jdbcType="VARCHAR" />
+    <result column="project_company_id" property="projectCompanyId" jdbcType="INTEGER" />
+    <result column="project_user_id" property="projectUserId" jdbcType="INTEGER" />
+    <result column="project_province" property="projectProvince" jdbcType="VARCHAR" />
+    <result column="project_city" property="projectCity" jdbcType="VARCHAR" />
+    <result column="project_county" property="projectCounty" jdbcType="VARCHAR" />
+    <result column="project_address" property="projectAddress" jdbcType="VARCHAR" />
+    <result column="project_longitude" property="projectLongitude" jdbcType="VARCHAR" />
+    <result column="project_latitude" property="projectLatitude" jdbcType="VARCHAR" />
+    <result column="project_img" property="projectImg" jdbcType="VARCHAR" />
+    <result column="project_cad" property="projectCad" jdbcType="VARCHAR" />
+    <result column="project_3durl" property="project3durl" jdbcType="VARCHAR" />
+    <result column="project_start_time" property="projectStartTime" jdbcType="TIMESTAMP" />
+    <result column="project_expire_time" property="projectExpireTime" jdbcType="TIMESTAMP" />
+    <result column="project_notify" property="projectNotify" jdbcType="INTEGER" />
+    <result column="project_permission_status" property="projectPermissionStatus" jdbcType="INTEGER" />
+    <result column="project_use_status" property="projectUseStatus" jdbcType="INTEGER" />
+    <result column="project_device_status" property="projectDeviceStatus" jdbcType="INTEGER" />
+    <result column="project_is_open" property="projectIsOpen" jdbcType="INTEGER" />
+    <result column="project_extend1" property="projectExtend1" jdbcType="VARCHAR" />
+    <result column="project_extend2" property="projectExtend2" jdbcType="VARCHAR" />
+    <result column="project_extend3" property="projectExtend3" jdbcType="VARCHAR" />
+    <result column="project_extend4" property="projectExtend4" jdbcType="VARCHAR" />
+    <result column="project_extend5" property="projectExtend5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    project_id, project_name, project_introduce, project_company_id, project_user_id, 
+    project_province, project_city, project_county, project_address, project_longitude, 
+    project_latitude, project_img, project_cad, project_3durl, project_start_time, project_expire_time, 
+    project_notify, project_permission_status, project_use_status, project_device_status, 
+    project_is_open, project_extend1, project_extend2, project_extend3, project_extend4, 
+    project_extend5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jyr.iot.platform.pojo.ProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from _project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _project
+    where project_id = #{projectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _project
+    where project_id = #{projectId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jyr.iot.platform.pojo.ProjectExample" >
+    delete from _project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jyr.iot.platform.pojo.Project" >
+    insert into _project (project_id, project_name, project_introduce, 
+      project_company_id, project_user_id, project_province, 
+      project_city, project_county, project_address, 
+      project_longitude, project_latitude, project_img, 
+      project_cad, project_3durl, project_start_time, 
+      project_expire_time, project_notify, project_permission_status, 
+      project_use_status, project_device_status, 
+      project_is_open, project_extend1, project_extend2, 
+      project_extend3, project_extend4, project_extend5
+      )
+    values (#{projectId,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectIntroduce,jdbcType=VARCHAR}, 
+      #{projectCompanyId,jdbcType=INTEGER}, #{projectUserId,jdbcType=INTEGER}, #{projectProvince,jdbcType=VARCHAR}, 
+      #{projectCity,jdbcType=VARCHAR}, #{projectCounty,jdbcType=VARCHAR}, #{projectAddress,jdbcType=VARCHAR}, 
+      #{projectLongitude,jdbcType=VARCHAR}, #{projectLatitude,jdbcType=VARCHAR}, #{projectImg,jdbcType=VARCHAR}, 
+      #{projectCad,jdbcType=VARCHAR}, #{project3durl,jdbcType=VARCHAR}, #{projectStartTime,jdbcType=TIMESTAMP}, 
+      #{projectExpireTime,jdbcType=TIMESTAMP}, #{projectNotify,jdbcType=INTEGER}, #{projectPermissionStatus,jdbcType=INTEGER}, 
+      #{projectUseStatus,jdbcType=INTEGER}, #{projectDeviceStatus,jdbcType=INTEGER}, 
+      #{projectIsOpen,jdbcType=INTEGER}, #{projectExtend1,jdbcType=VARCHAR}, #{projectExtend2,jdbcType=VARCHAR}, 
+      #{projectExtend3,jdbcType=VARCHAR}, #{projectExtend4,jdbcType=VARCHAR}, #{projectExtend5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyr.iot.platform.pojo.Project" >
+    insert into _project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="projectName != null" >
+        project_name,
+      </if>
+      <if test="projectIntroduce != null" >
+        project_introduce,
+      </if>
+      <if test="projectCompanyId != null" >
+        project_company_id,
+      </if>
+      <if test="projectUserId != null" >
+        project_user_id,
+      </if>
+      <if test="projectProvince != null" >
+        project_province,
+      </if>
+      <if test="projectCity != null" >
+        project_city,
+      </if>
+      <if test="projectCounty != null" >
+        project_county,
+      </if>
+      <if test="projectAddress != null" >
+        project_address,
+      </if>
+      <if test="projectLongitude != null" >
+        project_longitude,
+      </if>
+      <if test="projectLatitude != null" >
+        project_latitude,
+      </if>
+      <if test="projectImg != null" >
+        project_img,
+      </if>
+      <if test="projectCad != null" >
+        project_cad,
+      </if>
+      <if test="project3durl != null" >
+        project_3durl,
+      </if>
+      <if test="projectStartTime != null" >
+        project_start_time,
+      </if>
+      <if test="projectExpireTime != null" >
+        project_expire_time,
+      </if>
+      <if test="projectNotify != null" >
+        project_notify,
+      </if>
+      <if test="projectPermissionStatus != null" >
+        project_permission_status,
+      </if>
+      <if test="projectUseStatus != null" >
+        project_use_status,
+      </if>
+      <if test="projectDeviceStatus != null" >
+        project_device_status,
+      </if>
+      <if test="projectIsOpen != null" >
+        project_is_open,
+      </if>
+      <if test="projectExtend1 != null" >
+        project_extend1,
+      </if>
+      <if test="projectExtend2 != null" >
+        project_extend2,
+      </if>
+      <if test="projectExtend3 != null" >
+        project_extend3,
+      </if>
+      <if test="projectExtend4 != null" >
+        project_extend4,
+      </if>
+      <if test="projectExtend5 != null" >
+        project_extend5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="projectName != null" >
+        #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectIntroduce != null" >
+        #{projectIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCompanyId != null" >
+        #{projectCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="projectUserId != null" >
+        #{projectUserId,jdbcType=INTEGER},
+      </if>
+      <if test="projectProvince != null" >
+        #{projectProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCity != null" >
+        #{projectCity,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCounty != null" >
+        #{projectCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="projectAddress != null" >
+        #{projectAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLongitude != null" >
+        #{projectLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLatitude != null" >
+        #{projectLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="projectImg != null" >
+        #{projectImg,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCad != null" >
+        #{projectCad,jdbcType=VARCHAR},
+      </if>
+      <if test="project3durl != null" >
+        #{project3durl,jdbcType=VARCHAR},
+      </if>
+      <if test="projectStartTime != null" >
+        #{projectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectExpireTime != null" >
+        #{projectExpireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectNotify != null" >
+        #{projectNotify,jdbcType=INTEGER},
+      </if>
+      <if test="projectPermissionStatus != null" >
+        #{projectPermissionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="projectUseStatus != null" >
+        #{projectUseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="projectDeviceStatus != null" >
+        #{projectDeviceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="projectIsOpen != null" >
+        #{projectIsOpen,jdbcType=INTEGER},
+      </if>
+      <if test="projectExtend1 != null" >
+        #{projectExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="projectExtend2 != null" >
+        #{projectExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="projectExtend3 != null" >
+        #{projectExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="projectExtend4 != null" >
+        #{projectExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="projectExtend5 != null" >
+        #{projectExtend5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jyr.iot.platform.pojo.ProjectExample" resultType="java.lang.Integer" >
+    select count(*) from _project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update _project
+    <set >
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectName != null" >
+        project_name = #{record.projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectIntroduce != null" >
+        project_introduce = #{record.projectIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectCompanyId != null" >
+        project_company_id = #{record.projectCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectUserId != null" >
+        project_user_id = #{record.projectUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectProvince != null" >
+        project_province = #{record.projectProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectCity != null" >
+        project_city = #{record.projectCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectCounty != null" >
+        project_county = #{record.projectCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectAddress != null" >
+        project_address = #{record.projectAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectLongitude != null" >
+        project_longitude = #{record.projectLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectLatitude != null" >
+        project_latitude = #{record.projectLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectImg != null" >
+        project_img = #{record.projectImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectCad != null" >
+        project_cad = #{record.projectCad,jdbcType=VARCHAR},
+      </if>
+      <if test="record.project3durl != null" >
+        project_3durl = #{record.project3durl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectStartTime != null" >
+        project_start_time = #{record.projectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.projectExpireTime != null" >
+        project_expire_time = #{record.projectExpireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.projectNotify != null" >
+        project_notify = #{record.projectNotify,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectPermissionStatus != null" >
+        project_permission_status = #{record.projectPermissionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectUseStatus != null" >
+        project_use_status = #{record.projectUseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectDeviceStatus != null" >
+        project_device_status = #{record.projectDeviceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectIsOpen != null" >
+        project_is_open = #{record.projectIsOpen,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectExtend1 != null" >
+        project_extend1 = #{record.projectExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectExtend2 != null" >
+        project_extend2 = #{record.projectExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectExtend3 != null" >
+        project_extend3 = #{record.projectExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectExtend4 != null" >
+        project_extend4 = #{record.projectExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectExtend5 != null" >
+        project_extend5 = #{record.projectExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update _project
+    set project_id = #{record.projectId,jdbcType=INTEGER},
+      project_name = #{record.projectName,jdbcType=VARCHAR},
+      project_introduce = #{record.projectIntroduce,jdbcType=VARCHAR},
+      project_company_id = #{record.projectCompanyId,jdbcType=INTEGER},
+      project_user_id = #{record.projectUserId,jdbcType=INTEGER},
+      project_province = #{record.projectProvince,jdbcType=VARCHAR},
+      project_city = #{record.projectCity,jdbcType=VARCHAR},
+      project_county = #{record.projectCounty,jdbcType=VARCHAR},
+      project_address = #{record.projectAddress,jdbcType=VARCHAR},
+      project_longitude = #{record.projectLongitude,jdbcType=VARCHAR},
+      project_latitude = #{record.projectLatitude,jdbcType=VARCHAR},
+      project_img = #{record.projectImg,jdbcType=VARCHAR},
+      project_cad = #{record.projectCad,jdbcType=VARCHAR},
+      project_3durl = #{record.project3durl,jdbcType=VARCHAR},
+      project_start_time = #{record.projectStartTime,jdbcType=TIMESTAMP},
+      project_expire_time = #{record.projectExpireTime,jdbcType=TIMESTAMP},
+      project_notify = #{record.projectNotify,jdbcType=INTEGER},
+      project_permission_status = #{record.projectPermissionStatus,jdbcType=INTEGER},
+      project_use_status = #{record.projectUseStatus,jdbcType=INTEGER},
+      project_device_status = #{record.projectDeviceStatus,jdbcType=INTEGER},
+      project_is_open = #{record.projectIsOpen,jdbcType=INTEGER},
+      project_extend1 = #{record.projectExtend1,jdbcType=VARCHAR},
+      project_extend2 = #{record.projectExtend2,jdbcType=VARCHAR},
+      project_extend3 = #{record.projectExtend3,jdbcType=VARCHAR},
+      project_extend4 = #{record.projectExtend4,jdbcType=VARCHAR},
+      project_extend5 = #{record.projectExtend5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyr.iot.platform.pojo.Project" >
+    update _project
+    <set >
+      <if test="projectName != null" >
+        project_name = #{projectName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectIntroduce != null" >
+        project_introduce = #{projectIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCompanyId != null" >
+        project_company_id = #{projectCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="projectUserId != null" >
+        project_user_id = #{projectUserId,jdbcType=INTEGER},
+      </if>
+      <if test="projectProvince != null" >
+        project_province = #{projectProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCity != null" >
+        project_city = #{projectCity,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCounty != null" >
+        project_county = #{projectCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="projectAddress != null" >
+        project_address = #{projectAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLongitude != null" >
+        project_longitude = #{projectLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLatitude != null" >
+        project_latitude = #{projectLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="projectImg != null" >
+        project_img = #{projectImg,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCad != null" >
+        project_cad = #{projectCad,jdbcType=VARCHAR},
+      </if>
+      <if test="project3durl != null" >
+        project_3durl = #{project3durl,jdbcType=VARCHAR},
+      </if>
+      <if test="projectStartTime != null" >
+        project_start_time = #{projectStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectExpireTime != null" >
+        project_expire_time = #{projectExpireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectNotify != null" >
+        project_notify = #{projectNotify,jdbcType=INTEGER},
+      </if>
+      <if test="projectPermissionStatus != null" >
+        project_permission_status = #{projectPermissionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="projectUseStatus != null" >
+        project_use_status = #{projectUseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="projectDeviceStatus != null" >
+        project_device_status = #{projectDeviceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="projectIsOpen != null" >
+        project_is_open = #{projectIsOpen,jdbcType=INTEGER},
+      </if>
+      <if test="projectExtend1 != null" >
+        project_extend1 = #{projectExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="projectExtend2 != null" >
+        project_extend2 = #{projectExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="projectExtend3 != null" >
+        project_extend3 = #{projectExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="projectExtend4 != null" >
+        project_extend4 = #{projectExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="projectExtend5 != null" >
+        project_extend5 = #{projectExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where project_id = #{projectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyr.iot.platform.pojo.Project" >
+    update _project
+    set project_name = #{projectName,jdbcType=VARCHAR},
+      project_introduce = #{projectIntroduce,jdbcType=VARCHAR},
+      project_company_id = #{projectCompanyId,jdbcType=INTEGER},
+      project_user_id = #{projectUserId,jdbcType=INTEGER},
+      project_province = #{projectProvince,jdbcType=VARCHAR},
+      project_city = #{projectCity,jdbcType=VARCHAR},
+      project_county = #{projectCounty,jdbcType=VARCHAR},
+      project_address = #{projectAddress,jdbcType=VARCHAR},
+      project_longitude = #{projectLongitude,jdbcType=VARCHAR},
+      project_latitude = #{projectLatitude,jdbcType=VARCHAR},
+      project_img = #{projectImg,jdbcType=VARCHAR},
+      project_cad = #{projectCad,jdbcType=VARCHAR},
+      project_3durl = #{project3durl,jdbcType=VARCHAR},
+      project_start_time = #{projectStartTime,jdbcType=TIMESTAMP},
+      project_expire_time = #{projectExpireTime,jdbcType=TIMESTAMP},
+      project_notify = #{projectNotify,jdbcType=INTEGER},
+      project_permission_status = #{projectPermissionStatus,jdbcType=INTEGER},
+      project_use_status = #{projectUseStatus,jdbcType=INTEGER},
+      project_device_status = #{projectDeviceStatus,jdbcType=INTEGER},
+      project_is_open = #{projectIsOpen,jdbcType=INTEGER},
+      project_extend1 = #{projectExtend1,jdbcType=VARCHAR},
+      project_extend2 = #{projectExtend2,jdbcType=VARCHAR},
+      project_extend3 = #{projectExtend3,jdbcType=VARCHAR},
+      project_extend4 = #{projectExtend4,jdbcType=VARCHAR},
+      project_extend5 = #{projectExtend5,jdbcType=VARCHAR}
+    where project_id = #{projectId,jdbcType=INTEGER}
+  </update>
+</mapper>

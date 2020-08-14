@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyr.iot.platform.mapper.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.jyr.iot.platform.pojo.Device" >
+    <id column="device_id" property="deviceId" jdbcType="INTEGER" />
+    <result column="device_no" property="deviceNo" jdbcType="VARCHAR" />
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="device_permission" property="devicePermission" jdbcType="INTEGER" />
+    <result column="device_type" property="deviceType" jdbcType="VARCHAR" />
+    <result column="device_company_id" property="deviceCompanyId" jdbcType="INTEGER" />
+    <result column="device_project_id" property="deviceProjectId" jdbcType="INTEGER" />
+    <result column="device_camera_id" property="deviceCameraId" jdbcType="INTEGER" />
+    <result column="device_status" property="deviceStatus" jdbcType="INTEGER" />
+    <result column="device_use_status" property="deviceUseStatus" jdbcType="INTEGER" />
+    <result column="device_datatemplate_id" property="deviceDatatemplateId" jdbcType="INTEGER" />
+    <result column="device_extend1" property="deviceExtend1" jdbcType="VARCHAR" />
+    <result column="device_extend2" property="deviceExtend2" jdbcType="VARCHAR" />
+    <result column="device_extend3" property="deviceExtend3" jdbcType="VARCHAR" />
+    <result column="device_extend4" property="deviceExtend4" jdbcType="VARCHAR" />
+    <result column="device_extend5" property="deviceExtend5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    device_id, device_no, device_name, device_permission, device_type, device_company_id, 
+    device_project_id, device_camera_id, device_status, device_use_status, device_datatemplate_id, 
+    device_extend1, device_extend2, device_extend3, device_extend4, device_extend5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jyr.iot.platform.pojo.DeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from _device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _device
+    where device_id = #{deviceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _device
+    where device_id = #{deviceId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jyr.iot.platform.pojo.DeviceExample" >
+    delete from _device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jyr.iot.platform.pojo.Device" >
+    insert into _device (device_id, device_no, device_name, 
+      device_permission, device_type, device_company_id, 
+      device_project_id, device_camera_id, device_status, 
+      device_use_status, device_datatemplate_id, 
+      device_extend1, device_extend2, device_extend3, 
+      device_extend4, device_extend5)
+    values (#{deviceId,jdbcType=INTEGER}, #{deviceNo,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}, 
+      #{devicePermission,jdbcType=INTEGER}, #{deviceType,jdbcType=VARCHAR}, #{deviceCompanyId,jdbcType=INTEGER}, 
+      #{deviceProjectId,jdbcType=INTEGER}, #{deviceCameraId,jdbcType=INTEGER}, #{deviceStatus,jdbcType=INTEGER}, 
+      #{deviceUseStatus,jdbcType=INTEGER}, #{deviceDatatemplateId,jdbcType=INTEGER}, 
+      #{deviceExtend1,jdbcType=VARCHAR}, #{deviceExtend2,jdbcType=VARCHAR}, #{deviceExtend3,jdbcType=VARCHAR}, 
+      #{deviceExtend4,jdbcType=VARCHAR}, #{deviceExtend5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyr.iot.platform.pojo.Device" >
+    insert into _device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="deviceNo != null" >
+        device_no,
+      </if>
+      <if test="deviceName != null" >
+        device_name,
+      </if>
+      <if test="devicePermission != null" >
+        device_permission,
+      </if>
+      <if test="deviceType != null" >
+        device_type,
+      </if>
+      <if test="deviceCompanyId != null" >
+        device_company_id,
+      </if>
+      <if test="deviceProjectId != null" >
+        device_project_id,
+      </if>
+      <if test="deviceCameraId != null" >
+        device_camera_id,
+      </if>
+      <if test="deviceStatus != null" >
+        device_status,
+      </if>
+      <if test="deviceUseStatus != null" >
+        device_use_status,
+      </if>
+      <if test="deviceDatatemplateId != null" >
+        device_datatemplate_id,
+      </if>
+      <if test="deviceExtend1 != null" >
+        device_extend1,
+      </if>
+      <if test="deviceExtend2 != null" >
+        device_extend2,
+      </if>
+      <if test="deviceExtend3 != null" >
+        device_extend3,
+      </if>
+      <if test="deviceExtend4 != null" >
+        device_extend4,
+      </if>
+      <if test="deviceExtend5 != null" >
+        device_extend5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceNo != null" >
+        #{deviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="devicePermission != null" >
+        #{devicePermission,jdbcType=INTEGER},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCompanyId != null" >
+        #{deviceCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceProjectId != null" >
+        #{deviceProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceCameraId != null" >
+        #{deviceCameraId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceStatus != null" >
+        #{deviceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deviceUseStatus != null" >
+        #{deviceUseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deviceDatatemplateId != null" >
+        #{deviceDatatemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceExtend1 != null" >
+        #{deviceExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceExtend2 != null" >
+        #{deviceExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceExtend3 != null" >
+        #{deviceExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceExtend4 != null" >
+        #{deviceExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceExtend5 != null" >
+        #{deviceExtend5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jyr.iot.platform.pojo.DeviceExample" resultType="java.lang.Integer" >
+    select count(*) from _device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update _device
+    <set >
+      <if test="record.deviceId != null" >
+        device_id = #{record.deviceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceNo != null" >
+        device_no = #{record.deviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceName != null" >
+        device_name = #{record.deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicePermission != null" >
+        device_permission = #{record.devicePermission,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceType != null" >
+        device_type = #{record.deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceCompanyId != null" >
+        device_company_id = #{record.deviceCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceProjectId != null" >
+        device_project_id = #{record.deviceProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceCameraId != null" >
+        device_camera_id = #{record.deviceCameraId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceStatus != null" >
+        device_status = #{record.deviceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceUseStatus != null" >
+        device_use_status = #{record.deviceUseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceDatatemplateId != null" >
+        device_datatemplate_id = #{record.deviceDatatemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceExtend1 != null" >
+        device_extend1 = #{record.deviceExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceExtend2 != null" >
+        device_extend2 = #{record.deviceExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceExtend3 != null" >
+        device_extend3 = #{record.deviceExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceExtend4 != null" >
+        device_extend4 = #{record.deviceExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceExtend5 != null" >
+        device_extend5 = #{record.deviceExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update _device
+    set device_id = #{record.deviceId,jdbcType=INTEGER},
+      device_no = #{record.deviceNo,jdbcType=VARCHAR},
+      device_name = #{record.deviceName,jdbcType=VARCHAR},
+      device_permission = #{record.devicePermission,jdbcType=INTEGER},
+      device_type = #{record.deviceType,jdbcType=VARCHAR},
+      device_company_id = #{record.deviceCompanyId,jdbcType=INTEGER},
+      device_project_id = #{record.deviceProjectId,jdbcType=INTEGER},
+      device_camera_id = #{record.deviceCameraId,jdbcType=INTEGER},
+      device_status = #{record.deviceStatus,jdbcType=INTEGER},
+      device_use_status = #{record.deviceUseStatus,jdbcType=INTEGER},
+      device_datatemplate_id = #{record.deviceDatatemplateId,jdbcType=INTEGER},
+      device_extend1 = #{record.deviceExtend1,jdbcType=VARCHAR},
+      device_extend2 = #{record.deviceExtend2,jdbcType=VARCHAR},
+      device_extend3 = #{record.deviceExtend3,jdbcType=VARCHAR},
+      device_extend4 = #{record.deviceExtend4,jdbcType=VARCHAR},
+      device_extend5 = #{record.deviceExtend5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyr.iot.platform.pojo.Device" >
+    update _device
+    <set >
+      <if test="deviceNo != null" >
+        device_no = #{deviceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        device_name = #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="devicePermission != null" >
+        device_permission = #{devicePermission,jdbcType=INTEGER},
+      </if>
+      <if test="deviceType != null" >
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceCompanyId != null" >
+        device_company_id = #{deviceCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceProjectId != null" >
+        device_project_id = #{deviceProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceCameraId != null" >
+        device_camera_id = #{deviceCameraId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceStatus != null" >
+        device_status = #{deviceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deviceUseStatus != null" >
+        device_use_status = #{deviceUseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deviceDatatemplateId != null" >
+        device_datatemplate_id = #{deviceDatatemplateId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceExtend1 != null" >
+        device_extend1 = #{deviceExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceExtend2 != null" >
+        device_extend2 = #{deviceExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceExtend3 != null" >
+        device_extend3 = #{deviceExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceExtend4 != null" >
+        device_extend4 = #{deviceExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceExtend5 != null" >
+        device_extend5 = #{deviceExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where device_id = #{deviceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyr.iot.platform.pojo.Device" >
+    update _device
+    set device_no = #{deviceNo,jdbcType=VARCHAR},
+      device_name = #{deviceName,jdbcType=VARCHAR},
+      device_permission = #{devicePermission,jdbcType=INTEGER},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      device_company_id = #{deviceCompanyId,jdbcType=INTEGER},
+      device_project_id = #{deviceProjectId,jdbcType=INTEGER},
+      device_camera_id = #{deviceCameraId,jdbcType=INTEGER},
+      device_status = #{deviceStatus,jdbcType=INTEGER},
+      device_use_status = #{deviceUseStatus,jdbcType=INTEGER},
+      device_datatemplate_id = #{deviceDatatemplateId,jdbcType=INTEGER},
+      device_extend1 = #{deviceExtend1,jdbcType=VARCHAR},
+      device_extend2 = #{deviceExtend2,jdbcType=VARCHAR},
+      device_extend3 = #{deviceExtend3,jdbcType=VARCHAR},
+      device_extend4 = #{deviceExtend4,jdbcType=VARCHAR},
+      device_extend5 = #{deviceExtend5,jdbcType=VARCHAR}
+    where device_id = #{deviceId,jdbcType=INTEGER}
+  </update>
+</mapper>

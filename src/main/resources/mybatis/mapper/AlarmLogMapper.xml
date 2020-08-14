@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyr.iot.platform.mapper.AlarmLogMapper" >
+  <resultMap id="BaseResultMap" type="com.jyr.iot.platform.pojo.AlarmLog" >
+    <id column="alarm_id" property="alarmId" jdbcType="INTEGER" />
+    <result column="alarm_time" property="alarmTime" jdbcType="TIMESTAMP" />
+    <result column="alarm_company_id" property="alarmCompanyId" jdbcType="INTEGER" />
+    <result column="alarm_project_id" property="alarmProjectId" jdbcType="INTEGER" />
+    <result column="alarm_device_id" property="alarmDeviceId" jdbcType="INTEGER" />
+    <result column="alarm_l" property="alarmL" jdbcType="INTEGER" />
+    <result column="alarm_name" property="alarmName" jdbcType="VARCHAR" />
+    <result column="alarm_type" property="alarmType" jdbcType="INTEGER" />
+    <result column="alarm_value" property="alarmValue" jdbcType="INTEGER" />
+    <result column="alarm_status" property="alarmStatus" jdbcType="INTEGER" />
+    <result column="alarm_solve_result" property="alarmSolveResult" jdbcType="VARCHAR" />
+    <result column="alarm_solve_time" property="alarmSolveTime" jdbcType="TIMESTAMP" />
+    <result column="alarm_user_id" property="alarmUserId" jdbcType="INTEGER" />
+    <result column="alarm_extend1" property="alarmExtend1" jdbcType="VARCHAR" />
+    <result column="alarm_extend2" property="alarmExtend2" jdbcType="VARCHAR" />
+    <result column="alarm_extend3" property="alarmExtend3" jdbcType="VARCHAR" />
+    <result column="alarm_extend4" property="alarmExtend4" jdbcType="VARCHAR" />
+    <result column="alarm_extend5" property="alarmExtend5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    alarm_id, alarm_time, alarm_company_id, alarm_project_id, alarm_device_id, alarm_l, 
+    alarm_name, alarm_type, alarm_value, alarm_status, alarm_solve_result, alarm_solve_time, 
+    alarm_user_id, alarm_extend1, alarm_extend2, alarm_extend3, alarm_extend4, alarm_extend5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jyr.iot.platform.pojo.AlarmLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from _alarm_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _alarm_log
+    where alarm_id = #{alarmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _alarm_log
+    where alarm_id = #{alarmId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jyr.iot.platform.pojo.AlarmLogExample" >
+    delete from _alarm_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jyr.iot.platform.pojo.AlarmLog" >
+    insert into _alarm_log (alarm_id, alarm_time, alarm_company_id, 
+      alarm_project_id, alarm_device_id, alarm_l, 
+      alarm_name, alarm_type, alarm_value, 
+      alarm_status, alarm_solve_result, alarm_solve_time, 
+      alarm_user_id, alarm_extend1, alarm_extend2, 
+      alarm_extend3, alarm_extend4, alarm_extend5
+      )
+    values (#{alarmId,jdbcType=INTEGER}, #{alarmTime,jdbcType=TIMESTAMP}, #{alarmCompanyId,jdbcType=INTEGER}, 
+      #{alarmProjectId,jdbcType=INTEGER}, #{alarmDeviceId,jdbcType=INTEGER}, #{alarmL,jdbcType=INTEGER}, 
+      #{alarmName,jdbcType=VARCHAR}, #{alarmType,jdbcType=INTEGER}, #{alarmValue,jdbcType=INTEGER}, 
+      #{alarmStatus,jdbcType=INTEGER}, #{alarmSolveResult,jdbcType=VARCHAR}, #{alarmSolveTime,jdbcType=TIMESTAMP}, 
+      #{alarmUserId,jdbcType=INTEGER}, #{alarmExtend1,jdbcType=VARCHAR}, #{alarmExtend2,jdbcType=VARCHAR}, 
+      #{alarmExtend3,jdbcType=VARCHAR}, #{alarmExtend4,jdbcType=VARCHAR}, #{alarmExtend5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyr.iot.platform.pojo.AlarmLog" >
+    insert into _alarm_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="alarmId != null" >
+        alarm_id,
+      </if>
+      <if test="alarmTime != null" >
+        alarm_time,
+      </if>
+      <if test="alarmCompanyId != null" >
+        alarm_company_id,
+      </if>
+      <if test="alarmProjectId != null" >
+        alarm_project_id,
+      </if>
+      <if test="alarmDeviceId != null" >
+        alarm_device_id,
+      </if>
+      <if test="alarmL != null" >
+        alarm_l,
+      </if>
+      <if test="alarmName != null" >
+        alarm_name,
+      </if>
+      <if test="alarmType != null" >
+        alarm_type,
+      </if>
+      <if test="alarmValue != null" >
+        alarm_value,
+      </if>
+      <if test="alarmStatus != null" >
+        alarm_status,
+      </if>
+      <if test="alarmSolveResult != null" >
+        alarm_solve_result,
+      </if>
+      <if test="alarmSolveTime != null" >
+        alarm_solve_time,
+      </if>
+      <if test="alarmUserId != null" >
+        alarm_user_id,
+      </if>
+      <if test="alarmExtend1 != null" >
+        alarm_extend1,
+      </if>
+      <if test="alarmExtend2 != null" >
+        alarm_extend2,
+      </if>
+      <if test="alarmExtend3 != null" >
+        alarm_extend3,
+      </if>
+      <if test="alarmExtend4 != null" >
+        alarm_extend4,
+      </if>
+      <if test="alarmExtend5 != null" >
+        alarm_extend5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="alarmId != null" >
+        #{alarmId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmTime != null" >
+        #{alarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmCompanyId != null" >
+        #{alarmCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmProjectId != null" >
+        #{alarmProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmDeviceId != null" >
+        #{alarmDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmL != null" >
+        #{alarmL,jdbcType=INTEGER},
+      </if>
+      <if test="alarmName != null" >
+        #{alarmName,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmType != null" >
+        #{alarmType,jdbcType=INTEGER},
+      </if>
+      <if test="alarmValue != null" >
+        #{alarmValue,jdbcType=INTEGER},
+      </if>
+      <if test="alarmStatus != null" >
+        #{alarmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="alarmSolveResult != null" >
+        #{alarmSolveResult,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmSolveTime != null" >
+        #{alarmSolveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmUserId != null" >
+        #{alarmUserId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmExtend1 != null" >
+        #{alarmExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmExtend2 != null" >
+        #{alarmExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmExtend3 != null" >
+        #{alarmExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmExtend4 != null" >
+        #{alarmExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmExtend5 != null" >
+        #{alarmExtend5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jyr.iot.platform.pojo.AlarmLogExample" resultType="java.lang.Integer" >
+    select count(*) from _alarm_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update _alarm_log
+    <set >
+      <if test="record.alarmId != null" >
+        alarm_id = #{record.alarmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarmTime != null" >
+        alarm_time = #{record.alarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.alarmCompanyId != null" >
+        alarm_company_id = #{record.alarmCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarmProjectId != null" >
+        alarm_project_id = #{record.alarmProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarmDeviceId != null" >
+        alarm_device_id = #{record.alarmDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarmL != null" >
+        alarm_l = #{record.alarmL,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarmName != null" >
+        alarm_name = #{record.alarmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmType != null" >
+        alarm_type = #{record.alarmType,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarmValue != null" >
+        alarm_value = #{record.alarmValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarmStatus != null" >
+        alarm_status = #{record.alarmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarmSolveResult != null" >
+        alarm_solve_result = #{record.alarmSolveResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmSolveTime != null" >
+        alarm_solve_time = #{record.alarmSolveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.alarmUserId != null" >
+        alarm_user_id = #{record.alarmUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarmExtend1 != null" >
+        alarm_extend1 = #{record.alarmExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmExtend2 != null" >
+        alarm_extend2 = #{record.alarmExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmExtend3 != null" >
+        alarm_extend3 = #{record.alarmExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmExtend4 != null" >
+        alarm_extend4 = #{record.alarmExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alarmExtend5 != null" >
+        alarm_extend5 = #{record.alarmExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update _alarm_log
+    set alarm_id = #{record.alarmId,jdbcType=INTEGER},
+      alarm_time = #{record.alarmTime,jdbcType=TIMESTAMP},
+      alarm_company_id = #{record.alarmCompanyId,jdbcType=INTEGER},
+      alarm_project_id = #{record.alarmProjectId,jdbcType=INTEGER},
+      alarm_device_id = #{record.alarmDeviceId,jdbcType=INTEGER},
+      alarm_l = #{record.alarmL,jdbcType=INTEGER},
+      alarm_name = #{record.alarmName,jdbcType=VARCHAR},
+      alarm_type = #{record.alarmType,jdbcType=INTEGER},
+      alarm_value = #{record.alarmValue,jdbcType=INTEGER},
+      alarm_status = #{record.alarmStatus,jdbcType=INTEGER},
+      alarm_solve_result = #{record.alarmSolveResult,jdbcType=VARCHAR},
+      alarm_solve_time = #{record.alarmSolveTime,jdbcType=TIMESTAMP},
+      alarm_user_id = #{record.alarmUserId,jdbcType=INTEGER},
+      alarm_extend1 = #{record.alarmExtend1,jdbcType=VARCHAR},
+      alarm_extend2 = #{record.alarmExtend2,jdbcType=VARCHAR},
+      alarm_extend3 = #{record.alarmExtend3,jdbcType=VARCHAR},
+      alarm_extend4 = #{record.alarmExtend4,jdbcType=VARCHAR},
+      alarm_extend5 = #{record.alarmExtend5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyr.iot.platform.pojo.AlarmLog" >
+    update _alarm_log
+    <set >
+      <if test="alarmTime != null" >
+        alarm_time = #{alarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmCompanyId != null" >
+        alarm_company_id = #{alarmCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmProjectId != null" >
+        alarm_project_id = #{alarmProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmDeviceId != null" >
+        alarm_device_id = #{alarmDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmL != null" >
+        alarm_l = #{alarmL,jdbcType=INTEGER},
+      </if>
+      <if test="alarmName != null" >
+        alarm_name = #{alarmName,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmType != null" >
+        alarm_type = #{alarmType,jdbcType=INTEGER},
+      </if>
+      <if test="alarmValue != null" >
+        alarm_value = #{alarmValue,jdbcType=INTEGER},
+      </if>
+      <if test="alarmStatus != null" >
+        alarm_status = #{alarmStatus,jdbcType=INTEGER},
+      </if>
+      <if test="alarmSolveResult != null" >
+        alarm_solve_result = #{alarmSolveResult,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmSolveTime != null" >
+        alarm_solve_time = #{alarmSolveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="alarmUserId != null" >
+        alarm_user_id = #{alarmUserId,jdbcType=INTEGER},
+      </if>
+      <if test="alarmExtend1 != null" >
+        alarm_extend1 = #{alarmExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmExtend2 != null" >
+        alarm_extend2 = #{alarmExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmExtend3 != null" >
+        alarm_extend3 = #{alarmExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmExtend4 != null" >
+        alarm_extend4 = #{alarmExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmExtend5 != null" >
+        alarm_extend5 = #{alarmExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where alarm_id = #{alarmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyr.iot.platform.pojo.AlarmLog" >
+    update _alarm_log
+    set alarm_time = #{alarmTime,jdbcType=TIMESTAMP},
+      alarm_company_id = #{alarmCompanyId,jdbcType=INTEGER},
+      alarm_project_id = #{alarmProjectId,jdbcType=INTEGER},
+      alarm_device_id = #{alarmDeviceId,jdbcType=INTEGER},
+      alarm_l = #{alarmL,jdbcType=INTEGER},
+      alarm_name = #{alarmName,jdbcType=VARCHAR},
+      alarm_type = #{alarmType,jdbcType=INTEGER},
+      alarm_value = #{alarmValue,jdbcType=INTEGER},
+      alarm_status = #{alarmStatus,jdbcType=INTEGER},
+      alarm_solve_result = #{alarmSolveResult,jdbcType=VARCHAR},
+      alarm_solve_time = #{alarmSolveTime,jdbcType=TIMESTAMP},
+      alarm_user_id = #{alarmUserId,jdbcType=INTEGER},
+      alarm_extend1 = #{alarmExtend1,jdbcType=VARCHAR},
+      alarm_extend2 = #{alarmExtend2,jdbcType=VARCHAR},
+      alarm_extend3 = #{alarmExtend3,jdbcType=VARCHAR},
+      alarm_extend4 = #{alarmExtend4,jdbcType=VARCHAR},
+      alarm_extend5 = #{alarmExtend5,jdbcType=VARCHAR}
+    where alarm_id = #{alarmId,jdbcType=INTEGER}
+  </update>
+</mapper>

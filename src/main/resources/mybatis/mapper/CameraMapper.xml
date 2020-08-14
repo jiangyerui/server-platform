@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyr.iot.platform.mapper.CameraMapper" >
+  <resultMap id="BaseResultMap" type="com.jyr.iot.platform.pojo.Camera" >
+    <id column="camera_id" property="cameraId" jdbcType="INTEGER" />
+    <result column="camera_code" property="cameraCode" jdbcType="VARCHAR" />
+    <result column="camera_name" property="cameraName" jdbcType="VARCHAR" />
+    <result column="camera_project_id" property="cameraProjectId" jdbcType="INTEGER" />
+    <result column="camera_url" property="cameraUrl" jdbcType="VARCHAR" />
+    <result column="camera_eurl" property="cameraEurl" jdbcType="VARCHAR" />
+    <result column="camera_api_key" property="cameraApiKey" jdbcType="VARCHAR" />
+    <result column="camera_secret" property="cameraSecret" jdbcType="VARCHAR" />
+    <result column="camera_serial_number" property="cameraSerialNumber" jdbcType="VARCHAR" />
+    <result column="camera_remark" property="cameraRemark" jdbcType="VARCHAR" />
+    <result column="camera_status" property="cameraStatus" jdbcType="INTEGER" />
+    <result column="camera_extend1" property="cameraExtend1" jdbcType="VARCHAR" />
+    <result column="camera_extend2" property="cameraExtend2" jdbcType="VARCHAR" />
+    <result column="camera_extend3" property="cameraExtend3" jdbcType="VARCHAR" />
+    <result column="camera_extend4" property="cameraExtend4" jdbcType="VARCHAR" />
+    <result column="camera_extend5" property="cameraExtend5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    camera_id, camera_code, camera_name, camera_project_id, camera_url, camera_eurl, 
+    camera_api_key, camera_secret, camera_serial_number, camera_remark, camera_status, 
+    camera_extend1, camera_extend2, camera_extend3, camera_extend4, camera_extend5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jyr.iot.platform.pojo.CameraExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from _camera
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _camera
+    where camera_id = #{cameraId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _camera
+    where camera_id = #{cameraId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jyr.iot.platform.pojo.CameraExample" >
+    delete from _camera
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jyr.iot.platform.pojo.Camera" >
+    insert into _camera (camera_id, camera_code, camera_name, 
+      camera_project_id, camera_url, camera_eurl, 
+      camera_api_key, camera_secret, camera_serial_number, 
+      camera_remark, camera_status, camera_extend1, 
+      camera_extend2, camera_extend3, camera_extend4, 
+      camera_extend5)
+    values (#{cameraId,jdbcType=INTEGER}, #{cameraCode,jdbcType=VARCHAR}, #{cameraName,jdbcType=VARCHAR}, 
+      #{cameraProjectId,jdbcType=INTEGER}, #{cameraUrl,jdbcType=VARCHAR}, #{cameraEurl,jdbcType=VARCHAR}, 
+      #{cameraApiKey,jdbcType=VARCHAR}, #{cameraSecret,jdbcType=VARCHAR}, #{cameraSerialNumber,jdbcType=VARCHAR}, 
+      #{cameraRemark,jdbcType=VARCHAR}, #{cameraStatus,jdbcType=INTEGER}, #{cameraExtend1,jdbcType=VARCHAR}, 
+      #{cameraExtend2,jdbcType=VARCHAR}, #{cameraExtend3,jdbcType=VARCHAR}, #{cameraExtend4,jdbcType=VARCHAR}, 
+      #{cameraExtend5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyr.iot.platform.pojo.Camera" >
+    insert into _camera
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cameraId != null" >
+        camera_id,
+      </if>
+      <if test="cameraCode != null" >
+        camera_code,
+      </if>
+      <if test="cameraName != null" >
+        camera_name,
+      </if>
+      <if test="cameraProjectId != null" >
+        camera_project_id,
+      </if>
+      <if test="cameraUrl != null" >
+        camera_url,
+      </if>
+      <if test="cameraEurl != null" >
+        camera_eurl,
+      </if>
+      <if test="cameraApiKey != null" >
+        camera_api_key,
+      </if>
+      <if test="cameraSecret != null" >
+        camera_secret,
+      </if>
+      <if test="cameraSerialNumber != null" >
+        camera_serial_number,
+      </if>
+      <if test="cameraRemark != null" >
+        camera_remark,
+      </if>
+      <if test="cameraStatus != null" >
+        camera_status,
+      </if>
+      <if test="cameraExtend1 != null" >
+        camera_extend1,
+      </if>
+      <if test="cameraExtend2 != null" >
+        camera_extend2,
+      </if>
+      <if test="cameraExtend3 != null" >
+        camera_extend3,
+      </if>
+      <if test="cameraExtend4 != null" >
+        camera_extend4,
+      </if>
+      <if test="cameraExtend5 != null" >
+        camera_extend5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cameraId != null" >
+        #{cameraId,jdbcType=INTEGER},
+      </if>
+      <if test="cameraCode != null" >
+        #{cameraCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraName != null" >
+        #{cameraName,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraProjectId != null" >
+        #{cameraProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="cameraUrl != null" >
+        #{cameraUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraEurl != null" >
+        #{cameraEurl,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraApiKey != null" >
+        #{cameraApiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraSecret != null" >
+        #{cameraSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraSerialNumber != null" >
+        #{cameraSerialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraRemark != null" >
+        #{cameraRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraStatus != null" >
+        #{cameraStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cameraExtend1 != null" >
+        #{cameraExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExtend2 != null" >
+        #{cameraExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExtend3 != null" >
+        #{cameraExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExtend4 != null" >
+        #{cameraExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExtend5 != null" >
+        #{cameraExtend5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jyr.iot.platform.pojo.CameraExample" resultType="java.lang.Integer" >
+    select count(*) from _camera
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update _camera
+    <set >
+      <if test="record.cameraId != null" >
+        camera_id = #{record.cameraId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cameraCode != null" >
+        camera_code = #{record.cameraCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraName != null" >
+        camera_name = #{record.cameraName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraProjectId != null" >
+        camera_project_id = #{record.cameraProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cameraUrl != null" >
+        camera_url = #{record.cameraUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraEurl != null" >
+        camera_eurl = #{record.cameraEurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraApiKey != null" >
+        camera_api_key = #{record.cameraApiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraSecret != null" >
+        camera_secret = #{record.cameraSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraSerialNumber != null" >
+        camera_serial_number = #{record.cameraSerialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraRemark != null" >
+        camera_remark = #{record.cameraRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraStatus != null" >
+        camera_status = #{record.cameraStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.cameraExtend1 != null" >
+        camera_extend1 = #{record.cameraExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraExtend2 != null" >
+        camera_extend2 = #{record.cameraExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraExtend3 != null" >
+        camera_extend3 = #{record.cameraExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraExtend4 != null" >
+        camera_extend4 = #{record.cameraExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cameraExtend5 != null" >
+        camera_extend5 = #{record.cameraExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update _camera
+    set camera_id = #{record.cameraId,jdbcType=INTEGER},
+      camera_code = #{record.cameraCode,jdbcType=VARCHAR},
+      camera_name = #{record.cameraName,jdbcType=VARCHAR},
+      camera_project_id = #{record.cameraProjectId,jdbcType=INTEGER},
+      camera_url = #{record.cameraUrl,jdbcType=VARCHAR},
+      camera_eurl = #{record.cameraEurl,jdbcType=VARCHAR},
+      camera_api_key = #{record.cameraApiKey,jdbcType=VARCHAR},
+      camera_secret = #{record.cameraSecret,jdbcType=VARCHAR},
+      camera_serial_number = #{record.cameraSerialNumber,jdbcType=VARCHAR},
+      camera_remark = #{record.cameraRemark,jdbcType=VARCHAR},
+      camera_status = #{record.cameraStatus,jdbcType=INTEGER},
+      camera_extend1 = #{record.cameraExtend1,jdbcType=VARCHAR},
+      camera_extend2 = #{record.cameraExtend2,jdbcType=VARCHAR},
+      camera_extend3 = #{record.cameraExtend3,jdbcType=VARCHAR},
+      camera_extend4 = #{record.cameraExtend4,jdbcType=VARCHAR},
+      camera_extend5 = #{record.cameraExtend5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyr.iot.platform.pojo.Camera" >
+    update _camera
+    <set >
+      <if test="cameraCode != null" >
+        camera_code = #{cameraCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraName != null" >
+        camera_name = #{cameraName,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraProjectId != null" >
+        camera_project_id = #{cameraProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="cameraUrl != null" >
+        camera_url = #{cameraUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraEurl != null" >
+        camera_eurl = #{cameraEurl,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraApiKey != null" >
+        camera_api_key = #{cameraApiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraSecret != null" >
+        camera_secret = #{cameraSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraSerialNumber != null" >
+        camera_serial_number = #{cameraSerialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraRemark != null" >
+        camera_remark = #{cameraRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraStatus != null" >
+        camera_status = #{cameraStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cameraExtend1 != null" >
+        camera_extend1 = #{cameraExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExtend2 != null" >
+        camera_extend2 = #{cameraExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExtend3 != null" >
+        camera_extend3 = #{cameraExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExtend4 != null" >
+        camera_extend4 = #{cameraExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="cameraExtend5 != null" >
+        camera_extend5 = #{cameraExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where camera_id = #{cameraId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyr.iot.platform.pojo.Camera" >
+    update _camera
+    set camera_code = #{cameraCode,jdbcType=VARCHAR},
+      camera_name = #{cameraName,jdbcType=VARCHAR},
+      camera_project_id = #{cameraProjectId,jdbcType=INTEGER},
+      camera_url = #{cameraUrl,jdbcType=VARCHAR},
+      camera_eurl = #{cameraEurl,jdbcType=VARCHAR},
+      camera_api_key = #{cameraApiKey,jdbcType=VARCHAR},
+      camera_secret = #{cameraSecret,jdbcType=VARCHAR},
+      camera_serial_number = #{cameraSerialNumber,jdbcType=VARCHAR},
+      camera_remark = #{cameraRemark,jdbcType=VARCHAR},
+      camera_status = #{cameraStatus,jdbcType=INTEGER},
+      camera_extend1 = #{cameraExtend1,jdbcType=VARCHAR},
+      camera_extend2 = #{cameraExtend2,jdbcType=VARCHAR},
+      camera_extend3 = #{cameraExtend3,jdbcType=VARCHAR},
+      camera_extend4 = #{cameraExtend4,jdbcType=VARCHAR},
+      camera_extend5 = #{cameraExtend5,jdbcType=VARCHAR}
+    where camera_id = #{cameraId,jdbcType=INTEGER}
+  </update>
+</mapper>

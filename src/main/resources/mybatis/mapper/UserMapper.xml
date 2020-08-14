@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyr.iot.platform.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.jyr.iot.platform.pojo.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_role" property="userRole" jdbcType="INTEGER" />
+    <result column="user_company_id" property="userCompanyId" jdbcType="INTEGER" />
+    <result column="user_project_id" property="userProjectId" jdbcType="INTEGER" />
+    <result column="user_img" property="userImg" jdbcType="VARCHAR" />
+    <result column="user_mail" property="userMail" jdbcType="VARCHAR" />
+    <result column="user_permission_id" property="userPermissionId" jdbcType="INTEGER" />
+    <result column="user_status" property="userStatus" jdbcType="INTEGER" />
+    <result column="user_parent_id" property="userParentId" jdbcType="INTEGER" />
+    <result column="user_extend1" property="userExtend1" jdbcType="VARCHAR" />
+    <result column="user_extend2" property="userExtend2" jdbcType="VARCHAR" />
+    <result column="user_extend3" property="userExtend3" jdbcType="VARCHAR" />
+    <result column="user_extend4" property="userExtend4" jdbcType="VARCHAR" />
+    <result column="user_extend5" property="userExtend5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_phone, user_password, user_name, user_role, user_company_id, user_project_id, 
+    user_img, user_mail, user_permission_id, user_status, user_parent_id, user_extend1, 
+    user_extend2, user_extend3, user_extend4, user_extend5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jyr.iot.platform.pojo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from _user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from _user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from _user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jyr.iot.platform.pojo.UserExample" >
+    delete from _user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jyr.iot.platform.pojo.User" >
+    insert into _user (user_id, user_phone, user_password, 
+      user_name, user_role, user_company_id, 
+      user_project_id, user_img, user_mail, 
+      user_permission_id, user_status, user_parent_id, 
+      user_extend1, user_extend2, user_extend3, 
+      user_extend4, user_extend5)
+    values (#{userId,jdbcType=INTEGER}, #{userPhone,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{userRole,jdbcType=INTEGER}, #{userCompanyId,jdbcType=INTEGER}, 
+      #{userProjectId,jdbcType=INTEGER}, #{userImg,jdbcType=VARCHAR}, #{userMail,jdbcType=VARCHAR}, 
+      #{userPermissionId,jdbcType=INTEGER}, #{userStatus,jdbcType=INTEGER}, #{userParentId,jdbcType=INTEGER}, 
+      #{userExtend1,jdbcType=VARCHAR}, #{userExtend2,jdbcType=VARCHAR}, #{userExtend3,jdbcType=VARCHAR}, 
+      #{userExtend4,jdbcType=VARCHAR}, #{userExtend5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyr.iot.platform.pojo.User" >
+    insert into _user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userRole != null" >
+        user_role,
+      </if>
+      <if test="userCompanyId != null" >
+        user_company_id,
+      </if>
+      <if test="userProjectId != null" >
+        user_project_id,
+      </if>
+      <if test="userImg != null" >
+        user_img,
+      </if>
+      <if test="userMail != null" >
+        user_mail,
+      </if>
+      <if test="userPermissionId != null" >
+        user_permission_id,
+      </if>
+      <if test="userStatus != null" >
+        user_status,
+      </if>
+      <if test="userParentId != null" >
+        user_parent_id,
+      </if>
+      <if test="userExtend1 != null" >
+        user_extend1,
+      </if>
+      <if test="userExtend2 != null" >
+        user_extend2,
+      </if>
+      <if test="userExtend3 != null" >
+        user_extend3,
+      </if>
+      <if test="userExtend4 != null" >
+        user_extend4,
+      </if>
+      <if test="userExtend5 != null" >
+        user_extend5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null" >
+        #{userRole,jdbcType=INTEGER},
+      </if>
+      <if test="userCompanyId != null" >
+        #{userCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="userProjectId != null" >
+        #{userProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="userImg != null" >
+        #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userMail != null" >
+        #{userMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPermissionId != null" >
+        #{userPermissionId,jdbcType=INTEGER},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userParentId != null" >
+        #{userParentId,jdbcType=INTEGER},
+      </if>
+      <if test="userExtend1 != null" >
+        #{userExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="userExtend2 != null" >
+        #{userExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="userExtend3 != null" >
+        #{userExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="userExtend4 != null" >
+        #{userExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="userExtend5 != null" >
+        #{userExtend5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jyr.iot.platform.pojo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from _user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update _user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userPhone != null" >
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userRole != null" >
+        user_role = #{record.userRole,jdbcType=INTEGER},
+      </if>
+      <if test="record.userCompanyId != null" >
+        user_company_id = #{record.userCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userProjectId != null" >
+        user_project_id = #{record.userProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userImg != null" >
+        user_img = #{record.userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userMail != null" >
+        user_mail = #{record.userMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPermissionId != null" >
+        user_permission_id = #{record.userPermissionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userStatus != null" >
+        user_status = #{record.userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userParentId != null" >
+        user_parent_id = #{record.userParentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userExtend1 != null" >
+        user_extend1 = #{record.userExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userExtend2 != null" >
+        user_extend2 = #{record.userExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userExtend3 != null" >
+        user_extend3 = #{record.userExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userExtend4 != null" >
+        user_extend4 = #{record.userExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userExtend5 != null" >
+        user_extend5 = #{record.userExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update _user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_role = #{record.userRole,jdbcType=INTEGER},
+      user_company_id = #{record.userCompanyId,jdbcType=INTEGER},
+      user_project_id = #{record.userProjectId,jdbcType=INTEGER},
+      user_img = #{record.userImg,jdbcType=VARCHAR},
+      user_mail = #{record.userMail,jdbcType=VARCHAR},
+      user_permission_id = #{record.userPermissionId,jdbcType=INTEGER},
+      user_status = #{record.userStatus,jdbcType=INTEGER},
+      user_parent_id = #{record.userParentId,jdbcType=INTEGER},
+      user_extend1 = #{record.userExtend1,jdbcType=VARCHAR},
+      user_extend2 = #{record.userExtend2,jdbcType=VARCHAR},
+      user_extend3 = #{record.userExtend3,jdbcType=VARCHAR},
+      user_extend4 = #{record.userExtend4,jdbcType=VARCHAR},
+      user_extend5 = #{record.userExtend5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyr.iot.platform.pojo.User" >
+    update _user
+    <set >
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null" >
+        user_role = #{userRole,jdbcType=INTEGER},
+      </if>
+      <if test="userCompanyId != null" >
+        user_company_id = #{userCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="userProjectId != null" >
+        user_project_id = #{userProjectId,jdbcType=INTEGER},
+      </if>
+      <if test="userImg != null" >
+        user_img = #{userImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userMail != null" >
+        user_mail = #{userMail,jdbcType=VARCHAR},
+      </if>
+      <if test="userPermissionId != null" >
+        user_permission_id = #{userPermissionId,jdbcType=INTEGER},
+      </if>
+      <if test="userStatus != null" >
+        user_status = #{userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userParentId != null" >
+        user_parent_id = #{userParentId,jdbcType=INTEGER},
+      </if>
+      <if test="userExtend1 != null" >
+        user_extend1 = #{userExtend1,jdbcType=VARCHAR},
+      </if>
+      <if test="userExtend2 != null" >
+        user_extend2 = #{userExtend2,jdbcType=VARCHAR},
+      </if>
+      <if test="userExtend3 != null" >
+        user_extend3 = #{userExtend3,jdbcType=VARCHAR},
+      </if>
+      <if test="userExtend4 != null" >
+        user_extend4 = #{userExtend4,jdbcType=VARCHAR},
+      </if>
+      <if test="userExtend5 != null" >
+        user_extend5 = #{userExtend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyr.iot.platform.pojo.User" >
+    update _user
+    set user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_role = #{userRole,jdbcType=INTEGER},
+      user_company_id = #{userCompanyId,jdbcType=INTEGER},
+      user_project_id = #{userProjectId,jdbcType=INTEGER},
+      user_img = #{userImg,jdbcType=VARCHAR},
+      user_mail = #{userMail,jdbcType=VARCHAR},
+      user_permission_id = #{userPermissionId,jdbcType=INTEGER},
+      user_status = #{userStatus,jdbcType=INTEGER},
+      user_parent_id = #{userParentId,jdbcType=INTEGER},
+      user_extend1 = #{userExtend1,jdbcType=VARCHAR},
+      user_extend2 = #{userExtend2,jdbcType=VARCHAR},
+      user_extend3 = #{userExtend3,jdbcType=VARCHAR},
+      user_extend4 = #{userExtend4,jdbcType=VARCHAR},
+      user_extend5 = #{userExtend5,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>
